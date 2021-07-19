@@ -16,7 +16,6 @@ from datetime import datetime
 ap = argparse.ArgumentParser();
 ap.add_argument('-t', '--token', required=True);
 ap.add_argument('-m', '--my-username', required=True);
-ap.add_argument('-u', '--user-target');
 ap.add_argument('-f', '--file');
 ap.add_argument('-mf', '--max-followers');
 args = ap.parse_args();
@@ -36,7 +35,7 @@ sesh.headers.update(HEADERS)
 
 # OUTPUT JSON FILE WITH USERS DATA FOLLOWED
 if not args.file:
-    target = args.user_target;
+    target = args.my_username;
     res = sesh.get("https://api.github.com/users/" + target + "/followers");
     linkArray = requests.utils.parse_header_links(res.headers['Link'].rstrip('>').replace('>,<', ',<'));
     url = linkArray[1]['url'];
@@ -51,7 +50,7 @@ if not args.file:
         if maxFollowers != None:
             if len(users_to_follow) >= int(maxFollowers):
                 break;
-    outputJsonFile = str(datetime.now().strftime('%m-%d-%Y')) + "-Total" + str(len(users_to_follow)) + ".json";
+    outputJsonFile = str(datetime.now().strftime('%m-%d-%Y')) + "-Total-" + str(len(users_to_follow)) + ".json";
     with open(outputJsonFile, 'w+') as f:
         json.dump(users_to_follow, f, indent=4);
 else:
