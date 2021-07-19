@@ -1,7 +1,7 @@
-# Autobot Unfollow Users Github
+# Autobot Follow/Unfollow Github Users
 #### This project using GithubAPI to make safety than Selenium.
 
-## _Demo:_
+### _Run:_
 ```
-python index.py -t <PersonalAccessToken> -m <Username> -a
+python <Filename>.py -t <PersonalAccessToken> -m <Username>
 ```
